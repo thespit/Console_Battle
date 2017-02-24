@@ -42,7 +42,13 @@ public class Game {
 						state = MenuState.VILLAGE;
 					}
 				} else if (state == MenuState.BATTLE) {
-					if (selection == "1") {
+					if (team.IsAllDead()) {
+						output("you lose.");
+						state = MenuState.VILLAGE;
+					} else if (enemyTeam.IsAllDead()) {
+						output("you win.");
+						state = MenuState.VILLAGE;
+					} else if (selection == "1") {
 						state = MenuState.BATTLE_ATTACK;
 					}
 				} else if (state == MenuState.BATTLE_ATTACK) {

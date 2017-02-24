@@ -25,6 +25,15 @@ public class Team {
 		heroes.Remove(hero);
 	}
 
+	public bool IsAllDead () {
+		foreach (Hero hero in heroes) {
+			if (!hero.IsDead()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public String ToStr () {
 		string str = "";
 		foreach (Hero hero in heroes) {
