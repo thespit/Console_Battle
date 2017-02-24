@@ -50,17 +50,22 @@ public class Game {
 					state = MenuState.BATTLE_ATTACK_TARGET;
 				} else if (state == MenuState.BATTLE_ATTACK_TARGET) {
 					defer = enemyTeam.GetHeroByIndex(int.Parse(selection) - 1);
+					List<string> result = new List<string>();
+
 					if (atker.hit(defer)) {
-						output(atker.name + " hit " + defer.name);
+						result.Add(atker.name + " hit " + defer.name);
 						int dmg = atker.dmg(defer);
 						defer.hp -= dmg;
-						output("dmg " + dmg);
+						result.Add("dmg " + dmg);
 						if (defer.IsDead()) {
-							output(defer.name + " is dead.");
+							result.Add(defer.name + " is dead.");
 						}
 					} else {
-						output(atker.name + " miss " + defer.name);
+						result.Add(atker.name + " miss " + defer.name);
 					}
+
+					OutputList(result);
+
 					OutputBattleState(team, enemyTeam);
 					state = MenuState.BATTLE;
 				}
@@ -69,8 +74,15 @@ public class Game {
 			}
 		}
 	}
+
 	public static void output (string str) {
 		Console.WriteLine("> " + str);
+	}
+
+	public static void OutputList (List<string> strs) {
+		foreach (string str in strs) {
+			output(str);
+		}
 	}
 
 	public static string Input (string str) {
