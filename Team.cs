@@ -21,6 +21,10 @@ public class Team {
 		return heroes.Count;
 	}
 
+	public void Remove (Hero hero) {
+		heroes.Remove(hero);
+	}
+
 	public String ToStr () {
 		string str = "";
 		foreach (Hero hero in heroes) {
