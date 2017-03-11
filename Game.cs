@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Game {
+	static Village village = new Village();
 	static Team team = new Team();
 	static Team enemyTeam = null;
 	static Hero atker = null;
@@ -27,6 +28,13 @@ public class Game {
 					} else if (selection == "4") {
 						output("battle");
 						state = MenuState.BATTLE;
+					} else if (selection == "5") {
+						output("build sawmill");
+						if (village.HasBuilding(BuildingType.SAWMILL)) {
+							village.levelupBuilding(BuildingType.SAWMILL);
+						} else {
+							village.AddBuilding(new Sawmill());
+						}
 					} else if (selection == "0") {
 						output("Bye bye.");
 						break;
@@ -62,6 +70,8 @@ public class Game {
 					OutputBattleState(team, enemyTeam);
 					state = MenuState.BATTLE;
 				}
+
+				village.Tick();
 			} catch {
 				Console.WriteLine("error.");
 			}
@@ -134,7 +144,6 @@ public class Game {
 		Console.Write("> ");
 		string result = Console.ReadLine();
 		Console.Clear();
-		// Console.WriteLine("\n");
 		return result;
 	}
 
@@ -150,11 +159,13 @@ public class Game {
 	}
 
 	public static string OutputMenu (MenuState state) {
+		output("gold:" + Global.gold + " wood:" + Global.wood);
 		if (state == MenuState.VILLAGE) {
 			return Input("1: random hero"
 			+ "\n  2: print team"
 			+ "\n  3: random enemy team"
 			+ "\n  4: battle"
+			+ "\n  5: build sawmill"
 			+ "\n  0: quit");
 		} else if (state == MenuState.RANDOM_HERO) {
 			return Input("1: rerandom hero"
