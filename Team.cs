@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Team {
-	private List<Hero> heroes;
+	private List<Hero> heroes = new List<Hero>();
 
 	public Team () {
-		heroes = new List<Hero>();
 	}
 
 	public void AddHero (Hero hero) {
@@ -26,12 +25,7 @@ public class Team {
 	}
 
 	public bool IsAllDead () {
-		foreach (Hero hero in heroes) {
-			if (!hero.IsDead()) {
-				return false;
-			}
-		}
-		return true;
+		return !heroes.Exists(hero => !hero.IsDead());
 	}
 
 	public String ToStr () {

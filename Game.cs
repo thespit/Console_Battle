@@ -9,7 +9,7 @@ public class Game {
 	static Hero atker = null;
 	static Hero defer = null;
 	static Hero hero = null;
-		
+
 	public static void Main (String[] args) {
 		MenuState state = MenuState.VILLAGE;
 		while (true) {
@@ -31,7 +31,7 @@ public class Game {
 					} else if (selection == "5") {
 						output("build sawmill");
 						if (village.HasBuilding(BuildingType.SAWMILL)) {
-							village.levelupBuilding(BuildingType.SAWMILL);
+							village.LevelupBuilding(BuildingType.SAWMILL);
 						} else {
 							village.AddBuilding(new Sawmill());
 						}
