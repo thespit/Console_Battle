@@ -25,7 +25,7 @@ public class Village {
 	public void levelupBuilding (BuildingType type) {
 		Console.WriteLine("levelup a building " + type);
 		foreach (Building building in buildings) {
-			if (building.type == type) {
+			if (building.type.Equals(type)) {
 				building.level += 1;
 			}
 		}
